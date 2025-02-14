@@ -1,8 +1,10 @@
-import http from 'http';
-import fs from 'fs';
-import dotenv from 'dotenv';
-dotenv.config();
+// * 필요한 라이브러리 가져오기
+import http from 'http'; // 프로토콜 관련
+import fs from 'fs'; // 파일 관련
+import dotenv from 'dotenv'; // 환경변수 env 관련
+dotenv.config(); // env 사용하기 위해 선언
 
+// * 서버 만들기
 const server = http.createServer(function(req,res) {
   if(req.method === "GET") {
     if(req.url === "/") {
@@ -17,64 +19,10 @@ const server = http.createServer(function(req,res) {
       res.write(commonCss);
       res.end();
     }
-    if(req.url === "/src/utils/organisms.js") {
-      const organismsJs = fs.readFileSync('src/utils/organisms.js', 'utf-8');
+    if(req.url.endsWith(".js")) {
+      const inputJs = fs.readFileSync(`./${req.url}`, 'utf-8');
       res.writeHead(200, { 'Content-Type': 'application/javascript'});
-      res.write(organismsJs);
-      res.end();
-    }
-    if(req.url === "/src/utils/atoms.js") {
-      const atomsJs = fs.readFileSync('src/utils/atoms.js', 'utf-8');
-      res.writeHead(200, { 'Content-Type': 'application/javascript'});
-      res.write(atomsJs);
-      res.end();
-    }
-    if(req.url === "/src/utils/elements.js") {
-      const elementsJs = fs.readFileSync('src/utils/elements.js', 'utf-8');
-      res.writeHead(200, { 'Content-Type': 'application/javascript'});
-      res.write(elementsJs);
-      res.end();
-    }
-    if(req.url === "/src/utils/models.js") {
-      const modelsJs = fs.readFileSync('src/utils/models.js', 'utf-8');
-      res.writeHead(200, { 'Content-Type': 'application/javascript'});
-      res.write(modelsJs);
-      res.end();
-    }
-    if(req.url === "/src/utils/state.js") {
-      const stateJs = fs.readFileSync('src/utils/state.js', 'utf-8');
-      res.writeHead(200, { 'Content-Type': 'application/javascript'});
-      res.write(stateJs);
-      res.end();
-    }
-    if(req.url === "/src/utils/molecules.js") {
-      const moleculesJs = fs.readFileSync('src/utils/molecules.js', 'utf-8');
-      res.writeHead(200, { 'Content-Type': 'application/javascript'});
-      res.write(moleculesJs);
-      res.end();
-    }
-    if(req.url === "/src/controllers/mainController.js") {
-      const controllerJs = fs.readFileSync('src/controllers/mainController.js', 'utf-8');
-      res.writeHead(200, { 'Content-Type': 'application/javascript'});
-      res.write(controllerJs);
-      res.end();
-    }
-    if(req.url === "/src/constants/selectorConstants.js") {
-      const selectorsJs = fs.readFileSync('src/constants/selectorConstants.js', 'utf-8');
-      res.writeHead(200, { 'Content-Type': 'application/javascript'});
-      res.write(selectorsJs);
-      res.end();
-    }
-    if(req.url === "/src/storage/studentsData.js") {
-      const studentDataJs = fs.readFileSync('src/storage/studentsData.js', 'utf-8');
-      res.writeHead(200, { 'Content-Type': 'application/javascript'});
-      res.write(studentDataJs);
-      res.end();
-    }
-    if(req.url === "/src/utils/main.js") {
-      const mainJs = fs.readFileSync('src/utils/main.js', 'utf-8');
-      res.writeHead(200, { 'Content-Type': 'application/javascript'});
-      res.write(mainJs);
+      res.write(inputJs);
       res.end();
     }
   }
@@ -83,7 +31,8 @@ const server = http.createServer(function(req,res) {
   }
 });
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT; // env에 설정된 port 값 가져오기
+// * 서버 오픈
 server.listen(PORT, function() {
   console.log("현재 http://localhost:" + PORT + "/ 서버가 가동되고 있습니다.");
 });
