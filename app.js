@@ -5,7 +5,6 @@ dotenv.config();
 
 const server = http.createServer(function(req,res) {
   if(req.method === "GET") {
-    console.log(req.url);
     if(req.url === "/") {
       const indexPage = fs.readFileSync('views/index.html', 'utf-8');
       res.writeHead(200, { 'Content-Type': 'utf-8; text/html'});
@@ -13,14 +12,12 @@ const server = http.createServer(function(req,res) {
       res.end();
     }
     if(req.url === "/public/css/common.css") {
-      console.log("css들어옴");
       const commonCss = fs.readFileSync('public/css/common.css', 'utf-8');
       res.writeHead(200, { 'Content-Type': 'text/css'});
       res.write(commonCss);
       res.end();
     }
     if(req.url === "/src/utils/organisms.js") {
-      console.log("organisms.js 들어옴");
       const organismsJs = fs.readFileSync('src/utils/organisms.js', 'utf-8');
       res.writeHead(200, { 'Content-Type': 'application/javascript'});
       res.write(organismsJs);
