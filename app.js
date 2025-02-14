@@ -6,6 +6,7 @@ dotenv.config(); // env 사용하기 위해 선언
 
 // * 서버 만들기
 const server = http.createServer(function(req,res) {
+  // ? GET 방식이라면
   if(req.method === "GET") {
     if(req.url === "/") {
       const indexPage = fs.readFileSync('views/index.html', 'utf-8');
@@ -19,6 +20,7 @@ const server = http.createServer(function(req,res) {
       res.write(commonCss);
       res.end();
     }
+    // TODO 아래와 같은 방법으로 수정하면 코드를 간소화 할 수 있다!
     if(req.url.endsWith(".js")) {
       const inputJs = fs.readFileSync(`./${req.url}`, 'utf-8');
       res.writeHead(200, { 'Content-Type': 'application/javascript'});
@@ -26,6 +28,7 @@ const server = http.createServer(function(req,res) {
       res.end();
     }
   }
+  // ? POST 방식이라면
   if(req.method === "POST") {
 
   }
