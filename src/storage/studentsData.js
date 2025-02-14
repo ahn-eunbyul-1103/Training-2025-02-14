@@ -1,3 +1,4 @@
+// * 학생 데이터들 집합
 const STUDENTS = [
   { order: 1, name: "김민지", food: { like: ["짜장면", "짬뽕"], hate: ["피자"] } },
   { order: 2, name: "김요훈", food: { like: ["햄버거", "초밥"], hate: ["라면"] } },

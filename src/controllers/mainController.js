@@ -5,7 +5,9 @@ import SELECTORS from '../constants/selectorConstants.js';
 import MODELS from '../utils/models.js';
 import ORGANISMS from '../utils/organisms.js';
 
+// * 화면 조작과 관련된 컨트롤러
 const CONTROLLERS = {
+  // * 모달창 오픈
   openModal: function () {
     ATOMS.clear(ELEMENTS.modalOverlay);
     const modalContent = ATOMS.create("div", { class: "modal-content" }, []);
@@ -59,10 +61,12 @@ const CONTROLLERS = {
       }
     });
   },
+  // * 모달창 종료
   closeModal: function () {
     ELEMENTS.modalOverlay.classList.remove("active");
     ATOMS.clear(ELEMENTS.modal);
   },
+  // * 수정 및 추가 동작 관련
   handleConfirm: function () {
     const inputElement = document.getElementById(SELECTORS.foodInput);
     const inputValue = inputElement.value.trim();
@@ -80,6 +84,7 @@ const CONTROLLERS = {
     ORGANISMS.renderModifiedList();
     CONTROLLERS.closeModal();
   },
+  // * 삭제 동작 관련
   handleDelete: function () {
     STATE.selectedStudent.food[STATE.modalCategory].splice(STATE.modalIndex, 1);
     STATE.modified[STATE.selectedStudent.order] = STATE.selectedStudent;
@@ -87,6 +92,7 @@ const CONTROLLERS = {
     ORGANISMS.renderModifiedList();
     CONTROLLERS.closeModal();
   },
+  // * JSON 다운로드 관련
   downloadJSON: function () {
     const jsonData = JSON.stringify(Object.values(STATE.modified), null, 2);
     const dataBlob = new Blob([jsonData], {

@@ -1,3 +1,4 @@
+// * selectors에 대한 상수값 추가
 const SELECTORS = {
   foodInput: "food-input",
   addLike: "add-like",
